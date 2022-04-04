@@ -6,11 +6,11 @@
 #    By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/22 18:58:25 by yait-iaz          #+#    #+#              #
-#    Updated: 2022/03/22 19:01:08 by yait-iaz         ###   ########.fr        #
+#    Updated: 2022/04/04 16:19:42 by yait-iaz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = main.c
+SRC = main.c philo_operation.c
 SRC_B = 
 OBJ = $(SRC:.c=.o)
 OBJ_B = $(SRC_B:.c=.o)
