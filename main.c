@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:58:51 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/04/04 17:59:47 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/04/05 16:10:12 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,38 @@
 int main(int ac, char **av)
 {
 	t_philo	*philo;
+	t_philo	*join;
 	t_fork	*fork;
+	t_info	info;
 	int		ph;
+	int		fk;
 
 	philo = NULL;
 	fork = NULL;
-	if (is_num(av[1]) == 1)
-		ph = ft_atoi(av[1]);
-	else
+	if (info_init(&info, av) == 0)
 	{
 		printf("argument error!\n");
 		return (0);
 	}
+	ph = info.number_of_philo;
+	fk = ph;
+	while (fk != 0)
+	{
+		fork_init(fork);
+		fk--;
+	}
+	fork_counting(fork);
+	info.fork = fork;
 	while (ph != 0)
 	{
-		philo_init(philo);
-		fork_init(fork);
-		ph--;
+		philo_init(philo, &info);
 	}
 	philo_counting(philo);
-	fork_counting(fork);
-	
+	join = philo;
+	while (join)
+	{
+		pthread_join(join->tread_id, NULL);
+		join = join->next;
+	}
 	return (0);
 }

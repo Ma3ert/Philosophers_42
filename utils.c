@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 17:31:17 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/04/04 17:35:00 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/04/05 14:37:35 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,12 @@ int	ft_atoi(const char *str)
 	return (sign * nb);
 }
 
-int	is_num(char *str)
+int	ft_d_strlen(char **av)
 {
 	int	i;
 
 	i = 0;
-	if ((str[i] == '-' || str[i] == '+' ) && ft_strlen(str) > 1)
+	while (av[i])
 		i++;
-	while (str[i])
-	{
-		if ((str[i] >= 48 && str[i] <= 57))
-			i++;
-		else
-			return (0);
-	}
-	return (1);
+	return (i);
 }

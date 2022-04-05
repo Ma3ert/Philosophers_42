@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 17:55:18 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/04/04 17:55:32 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/04/05 14:55:12 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,18 @@ int	fork_counting(t_fork *fork)
 		i++;
 		tmp = tmp->next;
 	}
+}
+
+t_fork	*get_fork(t_fork *fork, int n)
+{
+	t_fork	*tmp;
+
+	tmp = fork;
+	while (tmp)
+	{
+		if (tmp->n == n)
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (NULL);
 }
