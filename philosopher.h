@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:58:20 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/04/05 16:08:11 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/04/06 16:12:59 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ typedef struct d_philo
 
 typedef struct d_info
 {
+	t_philo	*philo;
 	t_fork	*fork;
+	int		turn;
+	int		meal;
 	int		number_of_philo;
 	int 	time_to_eat;
 	int 	time_to_sleep;
@@ -58,14 +61,15 @@ int		check_value(char *str, char *str2);
 int		check_range(char *str);
 int		arg_validation(char **av);
 
-void	first_philo(t_philo *philo, t_info *info);
-void	philo_init(t_philo *philo, t_info *info);
+void	first_philo(t_philo *philo, t_info *info, int n);
+void	philo_init(t_philo *philo, t_info *info, int n);
 int		philo_counting(t_philo *philo);
 
 void	first_fork(t_fork *fork);
 void	fork_init(t_fork *fork);
 int		fork_counting(t_fork *fork);
 
-int		ft_simulation(t_philo *philo);
+int		ft_simulation(t_info *info);
+t_fork	*get_fork(t_fork *fork, int n);
 
 #endif

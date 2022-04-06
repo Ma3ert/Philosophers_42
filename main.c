@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:58:51 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/04/05 16:10:12 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/04/06 16:11:21 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,25 @@ int main(int ac, char **av)
 
 	philo = NULL;
 	fork = NULL;
+	fk = 0;
+	ph = 0;
 	if (info_init(&info, av) == 0)
 	{
 		printf("argument error!\n");
 		return (0);
 	}
-	ph = info.number_of_philo;
-	fk = ph;
-	while (fk != 0)
+	while (fk < info.number_of_philo)
 	{
 		fork_init(fork);
-		fk--;
+		fk++;
 	}
 	fork_counting(fork);
 	info.fork = fork;
-	while (ph != 0)
+	while (ph < info.number_of_philo)
 	{
-		philo_init(philo, &info);
+		philo_init(philo, &info, ph);
+		ph++;
 	}
-	philo_counting(philo);
 	join = philo;
 	while (join)
 	{
