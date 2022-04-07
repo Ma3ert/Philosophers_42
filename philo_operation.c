@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:18:59 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/04/06 16:13:20 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/04/07 15:05:17 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,9 @@ int	info_init(t_info *info, char **av)
 		return (0);
 	info->turn = 1;
 	info->meal = 0;
+	info->next_to_eat = 1;
 	info->number_of_philo = ft_atoi(av[i++]);
+	info->n_to_eat = info->number_of_philo / 2;
 	info->time_to_die = ft_atoi(av[i++]);
 	info->time_to_eat = ft_atoi(av[i++]);
 	info->time_to_sleep = ft_atoi(av[i++]);

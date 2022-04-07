@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:59:26 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/04/06 17:06:56 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/04/07 15:09:04 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,15 @@ void	try_to_eat_even(t_info *info, t_fork *fork1, t_fork *fork2)
 
 void	try_to_eat_odd(t_info *info, t_fork *fork1, t_fork *fork2)
 {
-	if (info->turn == info->philo->n)
+	if (info->next_to_eat == info->philo->n && info->next_to_eat <= info->n_to_eat)
 	{
 		pthread_mutex_lock(fork1->mutex);
 		pthread_mutex_lock(fork2->mutex);
+		if (info->next_to_eat > info->number_of_philo)
+		info->next_to_eat += 2;
+		info->n_to_eat -= 1;
 		fork1->used = 1;
 		fork2->used = 1;
-		if (info->turn >= info->number_of_philo)
-			info->turn = 1;
-		else
-			info->turn += 2;
 		usleep(info->time_to_eat);
 		pthread_mutex_unlock(fork1->mutex);
 		pthread_mutex_unlock(fork2->mutex);
@@ -70,10 +69,7 @@ int	ft_simulation(t_info *info)
 	while (n == info->number_of_philo)
 	{
 		while (fork1->used == 1 || fork2->used == 1)
-		{
-			// is_thinking
-			usleep(info->time_to_die);
-		}
+			usleep(info->time_to_die); // is_thinking
 		if (info->philo->n % 2 == 0)
 			try_to_eat_even(info, fork1, fork2);
 		else
