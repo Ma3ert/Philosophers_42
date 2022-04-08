@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:18:59 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/04/07 15:05:17 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/04/08 15:15:22 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	first_philo(t_philo *philo, t_info *info, int n)
 	philo->n = n + 1;
 	philo->left_fork = 0;
 	philo->right_fork = 0;
-	philo->eat = info->time_to_eat;
+	philo->eat = 0;
 	philo->time_to_die = info->time_to_die; 
 	philo->sleep = info->time_to_sleep;
 	philo->next = NULL;
@@ -57,6 +57,20 @@ int	philo_counting(t_philo *philo)
 		tmp = tmp->next;
 	}
 	return (i - 1);
+}
+
+t_philo	*get_philo(t_philo *philo, int n)
+{
+	t_philo	*tmp;
+
+	tmp = philo;
+	while (tmp)
+	{
+		if (tmp->n == n)
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (NULL);
 }
 
 int	info_init(t_info *info, char **av)

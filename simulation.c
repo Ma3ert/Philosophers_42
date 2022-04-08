@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:59:26 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/04/07 15:09:04 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/04/08 15:29:06 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,30 @@ void	try_to_eat_even(t_info *info, t_fork *fork1, t_fork *fork2)
 	}
 }
 
+void	ft_hostess(t_info *info, t_philo *philo)
+{
+	if (info->n_to_eat - 1 >= 0)
+		info->n_to_eat -= 1;
+	if (info->next_to_eat + 2 > info->number_of_philo && info->n_to_eat > 0)
+		info->next_to_eat = info->number_of_philo - info->next_to_eat + 2;
+	else if (info->n_to_eat > 0)
+		info->next_to_eat += 2;
+	usleep(info->time_to_eat);
+	if (philo->n == info->turn)
+	{
+		info->n_to_eat = info->number_of_philo / 2;
+		info->turn += 1;
+		info->next_to_eat = info->turn;
+	}
+}
+
 void	try_to_eat_odd(t_info *info, t_fork *fork1, t_fork *fork2)
 {
-	if (info->next_to_eat == info->philo->n && info->next_to_eat <= info->n_to_eat)
+	if (info->next_to_eat == info->philo->n && info->n_to_eat != 0)
 	{
 		pthread_mutex_lock(fork1->mutex);
 		pthread_mutex_lock(fork2->mutex);
-		if (info->next_to_eat > info->number_of_philo)
-		info->next_to_eat += 2;
-		info->n_to_eat -= 1;
-		fork1->used = 1;
-		fork2->used = 1;
-		usleep(info->time_to_eat);
+		ft_hostess(info, info->philo);
 		pthread_mutex_unlock(fork1->mutex);
 		pthread_mutex_unlock(fork2->mutex);
 	}
