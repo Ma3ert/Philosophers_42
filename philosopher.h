@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:58:20 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/04/07 15:05:40 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/04/11 14:48:32 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,19 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <time.h>
+#include <sys/time.h>
 
 # define MIN_INT "-2147483648"
 # define MAX_INT "2147483647"
 
 typedef struct d_philo
 {
+	struct	timeval	start;
 	pthread_t		tread_id;
 	int				n;
+	int				think;
 	int				eat;
-	int				time_to_die;
+	int				die;
 	int				sleep;
 	int				left_fork;
 	int				right_fork;

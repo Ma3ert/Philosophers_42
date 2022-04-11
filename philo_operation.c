@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:18:59 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/04/08 15:15:22 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/04/11 15:02:09 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	first_philo(t_philo *philo, t_info *info, int n)
 	philo = malloc(sizeof(t_philo));
 	if (!philo)
 		return ;
+	gettimeofday(&(philo->start), NULL);
 	philo->n = n + 1;
-	philo->left_fork = 0;
-	philo->right_fork = 0;
 	philo->eat = 0;
-	philo->time_to_die = info->time_to_die; 
-	philo->sleep = info->time_to_sleep;
+	philo->die = 0;
+	philo->think = 0;
+	philo->sleep = 0;
 	philo->next = NULL;
 	info->philo = philo;
 	pthread_create(philo->tread_id, NULL, ft_simulation, info);
@@ -71,6 +71,31 @@ t_philo	*get_philo(t_philo *philo, int n)
 		tmp = tmp->next;
 	}
 	return (NULL);
+}
+
+void	print_status(char *status, int n)
+{
+	struct timeval current_time;
+
+	gettimeofday(&current_time, NULL);
+	printf("%ld %d %s\n", current_time.tv_usec, n, status);
+}
+
+int	check_time(t_info *info)
+{
+	t_philo	*philo;
+	struct timeval current_time;
+
+	philo = info->philo;
+	gettimeofday(&current_time, NULL);
+	if (current_time.tv_usec - philo->start.tv_usec > info->time_to_die)
+	{
+		philo->die = 1;
+		print_status("died", info->philo->n);
+		info->number_of_philo -= 1;
+		return (0);
+	}
+	return (1);
 }
 
 int	info_init(t_info *info, char **av)

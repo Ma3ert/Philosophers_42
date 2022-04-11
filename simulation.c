@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:59:26 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/04/08 15:29:06 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/04/11 15:08:11 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ void	try_to_eat_even(t_info *info, t_fork *fork1, t_fork *fork2)
 		(info->turn % 2 != 0 && info->philo->n % 2 != 0))
 	{
 		pthread_mutex_lock(fork1->mutex);
-		pthread_mutex_lock(fork2->mutex);
 		fork1->used = 1;
+		print_status("has taken a fork", info->philo->n);
+		pthread_mutex_lock(fork2->mutex);
+		print_status("has taken a fork", info->philo->n);
 		fork2->used = 1;
 		if (info->philo->n == 1 || info->philo->n == 2)
 		{
@@ -30,9 +32,14 @@ void	try_to_eat_even(t_info *info, t_fork *fork1, t_fork *fork2)
 			else
 				info->turn = 1;
 		}
+		print_status("is eating", info->philo->n);
 		usleep(info->time_to_eat);
 		pthread_mutex_unlock(fork1->mutex);
+		fork1->used = 0;
 		pthread_mutex_unlock(fork2->mutex);
+		fork2->used = 0;
+		print_status("is sleeping", info->philo->n);
+		usleep(info->time_to_sleep);
 	}
 }
 
@@ -44,6 +51,7 @@ void	ft_hostess(t_info *info, t_philo *philo)
 		info->next_to_eat = info->number_of_philo - info->next_to_eat + 2;
 	else if (info->n_to_eat > 0)
 		info->next_to_eat += 2;
+	print_status("is eating", info->philo->n);
 	usleep(info->time_to_eat);
 	if (philo->n == info->turn)
 	{
@@ -55,13 +63,21 @@ void	ft_hostess(t_info *info, t_philo *philo)
 
 void	try_to_eat_odd(t_info *info, t_fork *fork1, t_fork *fork2)
 {
-	if (info->next_to_eat == info->philo->n && info->n_to_eat != 0)
+	if (info->next_to_eat == info->philo->n && info->n_to_eat > 0)
 	{
 		pthread_mutex_lock(fork1->mutex);
+		fork1->used = 1;
+		print_status("has taken a fork", info->philo->n);
 		pthread_mutex_lock(fork2->mutex);
+		fork2->used = 1;
+		print_status("has taken a fork", info->philo->n);
 		ft_hostess(info, info->philo);
 		pthread_mutex_unlock(fork1->mutex);
 		pthread_mutex_unlock(fork2->mutex);
+		fork1->used = 0;
+		fork2->used = 0;
+		print_status("is sleeping", info->philo->n);
+		usleep(info->time_to_sleep);
 	}
 }
 
@@ -81,13 +97,21 @@ int	ft_simulation(t_info *info)
 	while (n == info->number_of_philo)
 	{
 		while (fork1->used == 1 || fork2->used == 1)
-			usleep(info->time_to_die); // is_thinking
-		if (info->philo->n % 2 == 0)
+		{
+			if (info->philo->think == 0)
+				print_status("is thinking", info->philo->n);
+			info->philo->think = 1;
+			if (check_time(info) == 0)
+			{
+				info->philo->think = 0;
+				break ;
+			}
+		}
+		if (info->philo->n % 2 == 0 && info->philo->die == 0)
 			try_to_eat_even(info, fork1, fork2);
-		else
+		else if (info->philo->die == 0)
 			try_to_eat_odd(info, fork1, fork2);
 		if (info->meal_num == info->meal)
 			break ;
-		usleep(info->time_to_sleep);
 	}
 }
