@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:58:20 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/04/11 14:48:32 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/04/18 23:39:24 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,34 @@
 # define MIN_INT "-2147483648"
 # define MAX_INT "2147483647"
 
+
+typedef struct d_fork
+{
+	int				n;
+	int				used;
+	pthread_mutex_t mutex;
+	struct d_fork	*next;
+}				t_fork;
+
+typedef struct d_info
+{
+	t_fork	*fork;
+	int		turn;
+	int		meal;
+	int		n_to_eat;
+	int		next_to_eat;
+	int		number_of_philo;
+	long 	time_to_eat;
+	long 	time_to_sleep;
+	long	time_to_die;
+	int		meal_num;
+	struct	timeval	pro_start;
+}				t_info;
+
 typedef struct d_philo
 {
 	struct	timeval	start;
+	struct	d_info	*info;
 	pthread_t		tread_id;
 	int				n;
 	int				think;
@@ -37,44 +62,28 @@ typedef struct d_philo
 	struct d_philo	*next;
 }				t_philo;
 
-typedef struct d_info
-{
-	t_philo	*philo;
-	t_fork	*fork;
-	int		turn;
-	int		meal;
-	int		n_to_eat;
-	int		next_to_eat;
-	int		number_of_philo;
-	int 	time_to_eat;
-	int 	time_to_sleep;
-	int		time_to_die;
-	int		meal_num;
-}				t_info;
-
-typedef struct d_fork
-{
-	int				n;
-	int				used;
-	pthread_mutex_t *mutex;
-	struct d_fork	*next;
-}				t_fork;
-
 int		ft_atoi(const char *str);
 int		is_num(char *str);
 int		check_value(char *str, char *str2);
 int		check_range(char *str);
 int		arg_validation(char **av);
+int		ft_d_strlen(char **av);
 
-void	first_philo(t_philo *philo, t_info *info, int n);
-void	philo_init(t_philo *philo, t_info *info, int n);
+void	add_philo(t_philo **philo, t_info *info, int n);
+void	philo_init(t_philo **philo, t_info *info, int n);
 int		philo_counting(t_philo *philo);
+t_philo	*get_philo(t_philo *philo, int n);
 
-void	first_fork(t_fork *fork);
-void	fork_init(t_fork *fork);
+void	add_fork(t_fork **head_fork);
+void	fork_init(t_fork **fork);
 int		fork_counting(t_fork *fork);
 
-int		ft_simulation(t_info *info);
+t_info	*info_init(char **av, int ac);
+
+void	print_status(t_info *info, char *status, int n);
+int		check_time(t_philo *philo);
+
+void	*ft_simulation(void *param);
 t_fork	*get_fork(t_fork *fork, int n);
 
 #endif
