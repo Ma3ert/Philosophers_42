@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:58:20 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/04/18 23:39:24 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/04/20 00:10:29 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct d_info
 {
 	t_fork	*fork;
 	int		turn;
+	int		dead;
 	int		meal;
 	int		n_to_eat;
 	int		next_to_eat;

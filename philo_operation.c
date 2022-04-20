@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:18:59 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/04/18 23:40:22 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/04/20 00:10:45 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ t_info	*info_init(char **av, int ac)
 		return (NULL);
 	info = malloc(sizeof(t_info));
 	gettimeofday(&(info->pro_start), NULL);
+	info->dead = 0;
 	info->turn = 1;
 	info->meal = 0;
 	info->next_to_eat = 1;
