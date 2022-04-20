@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:59:26 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/04/19 00:45:09 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/04/20 21:52:15 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,17 +104,20 @@ void	*ft_simulation(void *param)
 
 	philo = (t_philo *)param;
 	info = philo->info;
-	if (philo->n + 1 > info->number_of_philo)
+	if (philo->n == 1)
+		n = 0;
+	else if (philo->n + 1 > info->number_of_philo)
 		n = 1;
 	else
 		n = philo->n + 1;
 	fork1 = get_fork(info->fork, philo->n);
 	fork2 = get_fork(info->fork, n);
 	n = info->number_of_philo;
-	while (n == info->number_of_philo)
+	while (n == info->number_of_philo && fork2 != NULL)
 	{
 		while (fork1->used == 1 || fork2->used == 1)
 		{
+			printf("hoho\n");
 			if (philo->think == 0)
 				print_status(info, "is thinking", philo->n);
 			philo->think = 1;
@@ -130,6 +133,12 @@ void	*ft_simulation(void *param)
 			try_to_eat_odd(philo, fork1, fork2);
 		if (info->meal_num == info->meal)
 			break ;
+	}
+	if (fork2 == NULL)
+	{
+		print_status(info, "is thinking", philo->n);
+		usleep(info->time_to_die * 1000);
+		print_status(info, "died", philo->n);
 	}
 	return (NULL);
 }
