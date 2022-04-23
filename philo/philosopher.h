@@ -6,12 +6,12 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:58:20 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/04/22 17:22:50 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/04/23 00:42:21 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define PHILLOSOPHER_H
-#ifdef PHILLOSOPHER_H
+#ifndef PHILOSOPHER_H
+# define PHILOSOPHER_H
 
 # include <stdio.h>
 # include <unistd.h>
@@ -23,35 +23,34 @@
 # define MIN_INT "-2147483648"
 # define MAX_INT "2147483647"
 
-
 typedef struct d_fork
 {
 	int				n;
 	int				used;
-	pthread_mutex_t mutex;
+	pthread_mutex_t	mutex;
 	struct d_fork	*next;
 }				t_fork;
 
 typedef struct d_info
 {
-	t_fork	*fork;
-	int		meal;
-	int		turn;
-	int		dead;
-	int		n_to_eat;
-	int		next_to_eat;
-	int		number_of_philo;
-	long 	time_to_eat;
-	long 	time_to_sleep;
-	long	time_to_die;
-	int		meal_num;
-	struct	timeval	pro_start;
+	t_fork			*fork;
+	int				meal;
+	int				turn;
+	int				dead;
+	int				n_to_eat;
+	int				next_to_eat;
+	int				number_of_philo;
+	long			time_to_eat;
+	long			time_to_sleep;
+	long			time_to_die;
+	int				meal_num;
+	struct timeval	pro_start;
 }				t_info;
 
 typedef struct d_philo
 {
-	struct	timeval	start;
-	struct	d_info	*info;
+	struct timeval	start;
+	struct d_info	*info;
 	pthread_t		tread_id;
 	int				meal;
 	int				n;
@@ -87,5 +86,7 @@ int		check_time(t_philo *philo);
 
 void	*ft_simulation(void *param);
 t_fork	*get_fork(t_fork *fork, int n);
+void	ft_hostess_even(t_info *info, t_philo *philo);
+void	ft_hostess_odd(t_info *info, t_philo *philo);
 
 #endif

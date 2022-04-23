@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 23:03:18 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/04/20 00:17:04 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/04/23 00:43:03 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	print_status(t_info *info, char *status, int n)
 	if (info->dead == 1 && ft_strcmp(status, "died") != 0)
 		return ;
 	philo_time = info->pro_start;
-	time = ((current_time.tv_usec / 1000) + (current_time.tv_sec * 1000)) -\
+	time = ((current_time.tv_usec / 1000) + (current_time.tv_sec * 1000)) - \
 		((philo_time.tv_usec / 1000) + (philo_time.tv_sec * 1000));
 	printf("%ld %d %s\n", time, n, status);
 }
