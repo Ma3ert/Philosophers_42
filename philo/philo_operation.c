@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:18:59 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/04/22 17:22:32 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/05/17 12:55:46 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	philo_init(t_philo **philo, t_info *info, int n)
 	(*philo) = malloc(sizeof(t_philo));
 	if (!(*philo))
 		return ;
-	gettimeofday(&((*philo)->start), NULL);
+	(*philo)->start = get_time();
 	(*philo)->meal = 0;
 	(*philo)->n = n;
 	(*philo)->eat = 0;
@@ -87,7 +87,7 @@ t_info	*info_init(char **av, int ac)
 	if (ac != 6 && ac != 5)
 		return (NULL);
 	info = malloc(sizeof(t_info));
-	gettimeofday(&(info->pro_start), NULL);
+	info->pro_start = get_time();
 	info->meal = 0;
 	info->dead = 0;
 	info->turn = 1;

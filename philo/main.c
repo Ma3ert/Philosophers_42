@@ -6,11 +6,30 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:58:51 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/04/22 17:20:46 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/05/17 12:37:56 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+
+long long	get_time()
+{
+	struct timeval	now;
+
+	gettimeofday(&now, NULL);
+	return ((long long)(now.tv_usec / 1000) + (now.tv_sec * 1000));
+}
+
+void	ft_usleep(long long time)
+{
+	long long start;
+
+	start = get_time();
+	while (get_time() - start <= time)
+	{
+		usleep(50);
+	}
+}
 
 t_philo	*create_simulation(t_philo *philo, t_fork *fork, t_info *info)
 {

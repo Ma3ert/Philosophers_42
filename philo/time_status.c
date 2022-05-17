@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 23:03:18 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/04/23 00:43:03 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/05/17 13:01:16 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,15 @@ int	ft_strcmp(const char *s1, const char *s2)
 
 void	print_status(t_info *info, char *status, int n)
 {
-	long			time;
-	struct timeval	current_time;
-	struct timeval	philo_time;
+	long		time;
+	long long	current_time;
+	long long	philo_time;
 
-	gettimeofday(&current_time, NULL);
+	current_time = get_time();
 	if (info->dead == 1 && ft_strcmp(status, "died") != 0)
 		return ;
 	philo_time = info->pro_start;
-	time = ((current_time.tv_usec / 1000) + (current_time.tv_sec * 1000)) - \
-		((philo_time.tv_usec / 1000) + (philo_time.tv_sec * 1000));
+	time = current_time - philo_time;
 	printf("%ld %d %s\n", time, n, status);
 }
 
@@ -51,12 +50,11 @@ int	check_time(t_philo *philo)
 {
 	t_info			*info;
 	long			time;
-	struct timeval	current_time;
+	long long		current_time;
 
 	info = philo->info;
-	gettimeofday(&current_time, NULL);
-	time = ((current_time.tv_sec - philo->start.tv_sec) * 1000) \
-	+ ((current_time.tv_usec - philo->start.tv_usec) / 1000);
+	current_time = get_time();
+	time = current_time - philo->start;
 	if (time > info->time_to_die)
 	{
 		philo->die = 1;

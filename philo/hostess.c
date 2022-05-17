@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 00:41:21 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/04/23 00:41:56 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/05/17 14:59:13 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	ft_hostess_even(t_info *info, t_philo *philo)
 	philo->think = 0;
 	print_status(info, "is eating", philo->n);
 	philo->meal += 1;
-	gettimeofday(&(philo->start), NULL);
-	usleep(info->time_to_eat * 1000);
+	philo->start = get_time();
+	ft_usleep(info->time_to_eat);
 	if (philo->n == 1 || philo->n == 2)
 	{
 		if (info->turn == 1)
@@ -40,8 +40,8 @@ void	ft_hostess_odd(t_info *info, t_philo *philo)
 		info->next_to_eat += 2;
 	print_status(info, "is eating", philo->n);
 	philo->think = 0;
-	gettimeofday(&(philo->start), NULL);
-	usleep(info->time_to_eat * 1000);
+	philo->start = get_time();
+	ft_usleep(info->time_to_eat);
 	if (philo->n == info->turn)
 	{
 		info->n_to_eat = info->number_of_philo / 2;

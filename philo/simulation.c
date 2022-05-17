@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:59:26 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/04/23 00:41:52 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/05/17 14:58:31 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	try_to_eat_even(t_philo *philo, t_fork *fork1, t_fork *fork2)
 		pthread_mutex_unlock(&(fork2->mutex));
 		fork2->used = 0;
 		print_status(info, "is sleeping", philo->n);
-		usleep(info->time_to_sleep * 1000);
+		ft_usleep(info->time_to_sleep);
 	}
 }
 
@@ -55,7 +55,7 @@ void	try_to_eat_odd(t_philo *philo, t_fork *fork1, t_fork *fork2)
 		pthread_mutex_unlock(&(fork2->mutex));
 		fork2->used = 0;
 		print_status(info, "is sleeping", philo->n);
-		usleep(info->time_to_sleep * 1000);
+		ft_usleep(info->time_to_sleep);
 	}
 }
 

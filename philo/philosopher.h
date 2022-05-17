@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:58:20 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/04/23 00:42:21 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/05/17 12:55:14 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ typedef struct d_info
 	long			time_to_sleep;
 	long			time_to_die;
 	int				meal_num;
-	struct timeval	pro_start;
+	long long		pro_start;
 }				t_info;
 
 typedef struct d_philo
 {
-	struct timeval	start;
+	long long		start;
 	struct d_info	*info;
 	pthread_t		tread_id;
 	int				meal;
@@ -83,6 +83,8 @@ t_info	*info_init(char **av, int ac);
 
 void	print_status(t_info *info, char *status, int n);
 int		check_time(t_philo *philo);
+long long	get_time();
+void	ft_usleep(long long time);
 
 void	*ft_simulation(void *param);
 t_fork	*get_fork(t_fork *fork, int n);
