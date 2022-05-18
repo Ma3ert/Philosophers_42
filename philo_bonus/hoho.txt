@@ -1,0 +1,12 @@
+the child simulation begin 0
+1652886449487 I'm gonna sleep
+1652886451488 I sleep
+the pid of the child: 57078[0]
+the child simulation begin 1
+the pid of the child: 0[1]
+pid of the exited process: -1
+1652886451488 the other are going out we are waiting for the first one 
+the pid of the child: 57078[0]
+the pid of the child: 57079[1]
+pid of the exited process: 57079
+1652886451488 the other are going out we are waiting for the first one 
