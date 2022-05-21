@@ -8,11 +8,10 @@ long long	get_time()
 	return ((long long)(now.tv_usec / 1000) + (now.tv_sec * 1000));
 }
 
-void	ft_test(int n)
+void	*ft_test(void *sema)
 {
-	if (n != 0)
-		sleep(20);
-	exit(EXIT_FAILURE);
+	printf("the child will exit\n");
+	exit(EXIT_SUCCESS);
 }
 
 void	ft_waitpid(int pid, int status)
@@ -29,24 +28,23 @@ void	ft_waitpid(int pid, int status)
 
 int main()
 {
-	pid_t pid;
+	pthread_t pid;
+	sem_t *sem;
 	int	status;
 	pid_t pids[5];
 	int i;
 
-	i = 0;
-	while (i < 2)
-	{
-		pid = fork();
-		if (pid == 0)
-		{
-			printf("the child simulation begin %d\n", i);
-			ft_test(i);
-		}
-		pids[i] = pid;
-		printf("the pid of the child: %d[%d]\n", pids[i], i);
-		i++;
-	}
-	pid = waitpid(-1, &status, 0);
-	ft_waitpid(pid, status);
+	status = 1;
+	sem_unlink("sem");
+	sem = sem_open("sem", O_CREAT, 0644, 1);
+	// pids[0] = fork();
+	// if (pids[0] == 0)
+	// 	ft_test(sem);
+	pthread_create(&pid, NULL, ft_test, (void *)sem);
+	pthread_detach(pid);
+	sleep(4);
+	// pthread_detach(pid);	
+	// pid = waitpid(-1, &status, 0);
+	// ft_waitpid(pid, status);
+	// exit(EXIT_SUCCESS);
 }

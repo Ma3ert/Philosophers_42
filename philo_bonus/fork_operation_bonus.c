@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:17:12 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/05/13 17:40:39 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/05/20 15:40:36 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	fork_init(t_fork **fork)
 	if (!(*fork))
 		return ;
 	n += 1;
+	sem_unlink(ft_itoa(n));
 	(*fork)->id = sem_open(ft_itoa(n), O_CREAT, 0644, 1);
 	(*fork)->used = 0;
 	(*fork)->next = NULL;

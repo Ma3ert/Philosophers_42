@@ -1,12 +1,161 @@
-the child simulation begin 0
-1652886449487 I'm gonna sleep
-1652886451488 I sleep
-the pid of the child: 57078[0]
-the child simulation begin 1
-the pid of the child: 0[1]
-pid of the exited process: -1
-1652886451488 the other are going out we are waiting for the first one 
-the pid of the child: 57078[0]
-the pid of the child: 57079[1]
-pid of the exited process: 57079
-1652886451488 the other are going out we are waiting for the first one 
+1 1 has taken a fork
+1 1 has taken a fork
+1 5 is eating
+202 1 is sleeping
+403 1 thinking
+403 1 has taken a fork
+403 1 has taken a fork
+403 1 is eating
+604 1 is sleeping
+805 1 thinking
+805 1 has taken a fork
+1006 1 has taken a fork
+1006 1 is eating
+1207 1 is sleeping
+1408 1 has taken a fork
+1408 1 has taken a fork
+1408 1 is eating
+1609 1 is sleeping
+1810 1 has taken a fork
+2011 1 has taken a fork
+2011 1 is eating
+2212 1 is sleeping
+2413 1 has taken a fork
+2413 1 has taken a fork
+2413 1 is eating
+2614 1 is sleeping
+2815 1 thinking
+2815 1 has taken a fork
+3016 1 has taken a fork
+3016 1 is eating
+3217 1 is sleeping
+1 3 has taken a fork
+1 3 has taken a fork
+1 3 is eating
+202 3 is sleeping
+403 3 thinking
+403 3 has taken a fork
+604 3 has taken a fork
+604 3 is eating
+805 3 is sleeping
+1006 3 has taken a fork
+1006 3 has taken a fork
+1006 3 is eating
+1207 3 is sleeping
+1408 3 thinking
+1408 3 has taken a fork
+1609 3 has taken a fork
+1609 3 is eating
+1810 3 is sleeping
+2011 3 thinking
+2011 3 has taken a fork
+2011 3 has taken a fork
+2011 3 is eating
+2212 3 is sleeping
+2413 3 has taken a fork
+2614 3 has taken a fork
+2614 3 is eating
+2815 3 is sleeping
+3016 3 thinking
+3016 3 has taken a fork
+3016 3 has taken a fork
+3016 3 is eating
+3217 3 is sleeping
+2 5 thinking
+2 5 has taken a fork
+202 5 has taken a fork
+202 5 is eating
+403 5 is sleeping
+604 5 thinking
+604 5 has taken a fork
+604 5 has taken a fork
+604 5 is eating
+805 5 is sleeping
+1006 5 has taken a fork
+1207 5 has taken a fork
+1207 5 is eating
+1408 5 is sleeping
+1609 5 thinking
+1609 5 has taken a fork
+1609 5 has taken a fork
+1609 5 is eating
+1810 5 is sleeping
+2011 5 has taken a fork
+2212 5 has taken a fork
+2212 5 is eating
+2413 5 is sleeping
+2614 5 thinking
+2614 5 has taken a fork
+2614 5 has taken a fork
+2614 5 is eating
+2815 5 is sleeping
+3016 5 thinking
+3016 5 has taken a fork
+3217 5 has taken a fork
+3217 5 is eating
+3418 5 is sleeping
+1 2 thinking
+202 2 has taken a fork
+202 2 has taken a fork
+202 2 is eating
+403 2 is sleeping
+604 2 has taken a fork
+805 2 has taken a fork
+805 2 is eating
+1006 2 is sleeping
+1207 2 thinking
+1207 2 has taken a fork
+1207 2 has taken a fork
+1207 2 is eating
+1408 2 is sleeping
+1609 2 thinking
+1609 2 has taken a fork
+1810 2 has taken a fork
+1810 2 is eating
+2011 2 is sleeping
+2212 2 thinking
+2212 2 has taken a fork
+2212 2 has taken a fork
+2212 2 is eating
+2413 2 is sleeping
+2614 2 thinking
+2614 2 has taken a fork
+2815 2 has taken a fork
+2815 2 is eating
+3016 2 is sleeping
+3217 2 has taken a fork
+3217 2 has taken a fork
+3217 2 is eating
+3418 2 is sleeping
+2 4 thinking
+202 4 has taken a fork
+403 4 has taken a fork
+403 4 is eating
+604 4 is sleeping
+805 4 has taken a fork
+805 4 has taken a fork
+805 4 is eating
+1006 4 is sleeping
+1207 4 thinking
+1207 4 has taken a fork
+1408 4 has taken a fork
+1408 4 is eating
+1609 4 is sleeping
+1810 4 has taken a fork
+1810 4 has taken a fork
+1810 4 is eating
+2011 4 is sleeping
+2212 4 thinking
+2212 4 has taken a fork
+2413 4 has taken a fork
+2413 4 is eating
+2614 4 is sleeping
+2815 4 thinking
+2815 4 has taken a fork
+2815 4 has taken a fork
+2815 4 is eating
+3016 4 is sleeping
+3217 4 has taken a fork
+3418 4 has taken a fork
+3418 4 is eating
+3619 4 is sleeping

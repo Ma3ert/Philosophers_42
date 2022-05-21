@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 23:06:52 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/05/18 21:09:45 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/05/21 17:34:32 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_info	*info_init(char **av, int ac)
 		return (NULL);
 	info = malloc(sizeof(t_info));
 	info->pro_start = get_time();
+	sem_unlink("print");
 	info->print = sem_open("print", O_CREAT, 0644, 1);
 	info->meal = 0;
 	info->dead = 0;
@@ -102,7 +103,7 @@ void	ft_exit(t_philo *philo, t_info *info, int status, int n)
 		{
 			if (info->meal_num == 0)
 				return ;
-			waitpid(-1, status, 0);
+			waitpid(-1, &status, 0);
 			return (ft_exit(philo,info, status, n - 1));
 		}
 		if (WEXITSTATUS(status) == EXIT_FAILURE)
@@ -131,7 +132,8 @@ int main(int ac, char **av)
 	waitpid(-1, &status, 0);
 	ft_exit(philo, info, status, info->number_of_philo);
 	n = 1;
-	while (fork && philo->id != 0)
+	sem_unlink("print");
+	while (fork)
 	{
 		sem_close(fork->id);
 		sem_unlink(ft_itoa(n));
