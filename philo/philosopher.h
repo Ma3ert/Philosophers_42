@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:58:20 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/05/17 12:55:14 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/05/22 13:02:36 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct d_fork
 typedef struct d_info
 {
 	t_fork			*fork;
+	pthread_mutex_t	print;
 	int				meal;
 	int				turn;
 	int				dead;
@@ -63,32 +64,32 @@ typedef struct d_philo
 	struct d_philo	*next;
 }				t_philo;
 
-int		ft_atoi(const char *str);
-int		is_num(char *str);
-int		check_value(char *str, char *str2);
-int		check_range(char *str);
-int		arg_validation(char **av, int ac);
-int		ft_d_strlen(char **av);
+int			ft_atoi(const char *str);
+int			is_num(char *str);
+int			check_value(char *str, char *str2);
+int			check_range(char *str);
+int			arg_validation(char **av, int ac);
+int			ft_d_strlen(char **av);
 
-void	add_philo(t_philo **philo, t_info *info, int n);
-void	philo_init(t_philo **philo, t_info *info, int n);
-int		philo_counting(t_philo *philo);
-t_philo	*get_philo(t_philo *philo, int n);
+void		add_philo(t_philo **philo, t_info *info, int n);
+void		philo_init(t_philo **philo, t_info *info, int n);
+int			philo_counting(t_philo *philo);
+t_philo		*get_philo(t_philo *philo, int n);
 
-void	add_fork(t_fork **head_fork);
-void	fork_init(t_fork **fork);
-int		fork_counting(t_fork *fork);
+void		add_fork(t_fork **head_fork);
+void		fork_init(t_fork **fork);
+int			fork_counting(t_fork *fork);
 
-t_info	*info_init(char **av, int ac);
+t_info		*info_init(char **av, int ac);
 
-void	print_status(t_info *info, char *status, int n);
-int		check_time(t_philo *philo);
-long long	get_time();
-void	ft_usleep(long long time);
+void		print_status(t_info *info, char *status, int n);
+int			check_time(t_philo *philo);
+long long	get_time(void);
+void		ft_usleep(long long time);
 
-void	*ft_simulation(void *param);
-t_fork	*get_fork(t_fork *fork, int n);
-void	ft_hostess_even(t_info *info, t_philo *philo);
-void	ft_hostess_odd(t_info *info, t_philo *philo);
+void		*ft_simulation(void *param);
+t_fork		*get_fork(t_fork *fork, int n);
+void		ft_hostess_even(t_info *info, t_philo *philo);
+void		ft_hostess_odd(t_info *info, t_philo *philo);
 
 #endif

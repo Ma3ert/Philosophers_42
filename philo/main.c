@@ -6,13 +6,13 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:58:51 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/05/17 12:37:56 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/05/22 13:01:57 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-long long	get_time()
+long long	get_time(void)
 {
 	struct timeval	now;
 
@@ -22,7 +22,7 @@ long long	get_time()
 
 void	ft_usleep(long long time)
 {
-	long long start;
+	long long	start;
 
 	start = get_time();
 	while (get_time() - start <= time)

@@ -6,30 +6,11 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 23:06:52 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/05/21 17:34:32 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/05/22 12:48:26 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
-
-long long	get_time()
-{
-	struct timeval	now;
-
-	gettimeofday(&now, NULL);
-	return ((long long)(now.tv_usec / 1000) + (now.tv_sec * 1000));
-}
-
-void	ft_usleep(long long time)
-{
-	long long start;
-
-	start = get_time();
-	while (get_time() - start <= time)
-	{
-		usleep(50);
-	}
-}
 
 t_info	*info_init(char **av, int ac)
 {
@@ -104,14 +85,17 @@ void	ft_exit(t_philo *philo, t_info *info, int status, int n)
 			if (info->meal_num == 0)
 				return ;
 			waitpid(-1, &status, 0);
-			return (ft_exit(philo,info, status, n - 1));
+			return (ft_exit(philo, info, status, n - 1));
 		}
 		if (WEXITSTATUS(status) == EXIT_FAILURE)
+		{
+			sem_unlink("print");
 			kill_proccess(info);
+		}
 	}
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	int		n;
 	int		status;
@@ -119,7 +103,6 @@ int main(int ac, char **av)
 	t_philo	*philo;
 	t_info	*info;
 
-	n = 1;
 	philo = NULL;
 	fork = NULL;
 	if (arg_validation(av, ac) == 0)
@@ -132,7 +115,6 @@ int main(int ac, char **av)
 	waitpid(-1, &status, 0);
 	ft_exit(philo, info, status, info->number_of_philo);
 	n = 1;
-	sem_unlink("print");
 	while (fork)
 	{
 		sem_close(fork->id);

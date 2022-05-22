@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 23:03:18 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/05/17 13:01:16 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/05/22 12:58:59 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ void	print_status(t_info *info, char *status, int n)
 		return ;
 	philo_time = info->pro_start;
 	time = current_time - philo_time;
-	printf("%ld %d %s\n", time, n, status);
+	pthread_mutex_lock(&(info->print));
+	if (info->dead != 1)
+		printf("%ld %d %s\n", time, n, status);
+	pthread_mutex_unlock(&(info->print));
 }
 
 int	check_time(t_philo *philo)
@@ -58,8 +61,8 @@ int	check_time(t_philo *philo)
 	if (time > info->time_to_die)
 	{
 		philo->die = 1;
-		philo->info->dead = 1;
 		print_status(philo->info, "died", philo->n);
+		philo->info->dead = 1;
 		info->number_of_philo -= 1;
 		return (0);
 	}

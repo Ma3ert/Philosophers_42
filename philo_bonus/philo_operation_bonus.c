@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:47:01 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/05/17 15:13:57 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/05/22 10:38:42 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	philo_init(t_philo **philo, t_info *info, int n)
 {
 	static int	i;
+
 	(*philo) = malloc(sizeof(t_philo));
 	if (!(*philo))
 		return ;

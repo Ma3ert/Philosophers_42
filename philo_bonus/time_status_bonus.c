@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 15:56:20 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/05/21 13:05:12 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/05/22 10:49:19 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	print_status(t_info *info, char *status, int n)
 	time = current_time - philo_time;
 	sem_wait(info->print);
 	printf("%ld %d %s\n", time, n, status);
-	sem_post(info->print);
+	if (ft_strcmp(status, "died") != 0)
+		sem_post(info->print);
 }
 
 int	check_time(t_philo *philo)
@@ -59,8 +60,26 @@ int	check_time(t_philo *philo)
 	{
 		philo->die = 1;
 		print_status(philo->info, "died", philo->n);
-		sem_wait(info->print);
 		exit(EXIT_FAILURE);
 	}
 	return (1);
+}
+
+long long	get_time(void)
+{
+	struct timeval	now;
+
+	gettimeofday(&now, NULL);
+	return ((long long)(now.tv_usec / 1000) + (now.tv_sec * 1000));
+}
+
+void	ft_usleep(long long time)
+{
+	long long	start;
+
+	start = get_time();
+	while (get_time() - start <= time)
+	{
+		usleep(50);
+	}
 }

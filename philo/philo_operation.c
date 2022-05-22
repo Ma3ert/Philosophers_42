@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:18:59 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/05/17 12:55:46 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/05/22 12:55:41 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ t_info	*info_init(char **av, int ac)
 	if (ac != 6 && ac != 5)
 		return (NULL);
 	info = malloc(sizeof(t_info));
+	pthread_mutex_init(&(info->print), NULL);
 	info->pro_start = get_time();
 	info->meal = 0;
 	info->dead = 0;

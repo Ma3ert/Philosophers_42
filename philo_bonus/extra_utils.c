@@ -6,11 +6,12 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:39:46 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/05/13 17:40:00 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/05/22 13:03:07 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+
 static int	l_n(long n)
 {
 	int	l;
