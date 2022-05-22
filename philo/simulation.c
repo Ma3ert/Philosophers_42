@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:59:26 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/05/17 14:58:31 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/05/22 14:32:03 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,10 @@ void	wait_for_turn(t_philo *philo, t_fork *fork1, t_fork *fork2)
 	info = philo->info;
 	while (fork1->used == 1 || fork2->used == 1 || info->number_of_philo == 1)
 	{
-		if (philo->think == 0)
+		if (philo->think == 0 && info->number_of_philo != 1)
 			print_status(info, "is thinking", philo->n);
+		else if (philo->think == 0 && info->number_of_philo == 1)
+			print_status(info, "has taken a fork", philo->n);
 		philo->think = 1;
 		if (check_time(philo) == 0)
 		{

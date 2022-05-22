@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 15:46:45 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/05/22 10:45:35 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/05/22 14:40:30 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ void	try_to_eat(t_philo *philo, t_fork *fork1, t_fork *fork2)
 
 void	set_turn(t_philo *philo, t_info *info, int turn)
 {
-	if (turn == philo->n)
+	if (turn == philo->n && info->number_of_philo != 1)
 	{
 		philo->eat = 1;
 		philo->think = 1;
 		return ;
 	}
 	info->n_to_eat -= 1;
-	if (info->n_to_eat == 0)
+	if (info->n_to_eat <= 0)
 		return ;
 	if (turn + 2 <= info->number_of_philo)
 		return (set_turn(philo, info, turn + 2));
@@ -76,7 +76,8 @@ void	wait_for_turn(t_philo *philo, t_info *info)
 		info->turn += 1;
 	if (philo->eat == 0)
 	{
-		print_status(info, "thinking", philo->n);
+		if (info->number_of_philo > 1)
+			print_status(info, "thinking", philo->n);
 		pthread_create(&thread, NULL, ft_thinking, (void *)philo);
 		pthread_detach(thread);
 		usleep(100);
