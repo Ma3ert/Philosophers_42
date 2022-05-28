@@ -6,17 +6,17 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 15:46:45 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/05/22 14:40:30 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/05/28 11:07:27 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void	try_to_eat(t_philo *philo, t_fork *fork1, t_fork *fork2)
+void	try_to_eat(t_philo *philo, t_fork *fork)
 {
-	sem_wait(fork1->id);
+	sem_wait(fork->id);
 	print_status(philo->info, "has taken a fork", philo->n);
-	sem_wait(fork2->id);
+	sem_wait(fork->id);
 	print_status(philo->info, "has taken a fork", philo->n);
 	philo->think = 1;
 	print_status(philo->info, "is eating", philo->n);
@@ -24,8 +24,8 @@ void	try_to_eat(t_philo *philo, t_fork *fork1, t_fork *fork2)
 	ft_usleep(philo->info->time_to_eat);
 	philo->eat = 0;
 	philo->meal += 1;
-	sem_post(fork1->id);
-	sem_post(fork2->id);
+	sem_post(fork->id);
+	sem_post(fork->id);
 	philo->think = 0;
 	print_status(philo->info, "is sleeping", philo->n);
 	ft_usleep(philo->info->time_to_sleep);
@@ -88,20 +88,18 @@ void	*ft_simulation_bonus(t_philo *philo)
 {
 	int			n;
 	t_info		*info;
-	t_fork		*fork1;
-	t_fork		*fork2;
+	t_fork		*fork;
 
 	info = philo->info;
 	if (philo->n + 1 > info->number_of_philo)
 		n = 1;
 	else
 		n = philo->n + 1;
-	fork1 = get_fork(info->fork, philo->n);
-	fork2 = get_fork(info->fork, n);
+	fork = philo->info->fork;
 	while (1)
 	{
 		wait_for_turn(philo, info);
-		try_to_eat(philo, fork1, fork2);
+		try_to_eat(philo, fork);
 		if (philo->meal >= info->meal_num && info->meal_num > 0)
 			exit(EXIT_SUCCESS);
 		check_time(philo);

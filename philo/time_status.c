@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 23:03:18 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/05/22 12:58:59 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/05/23 16:40:14 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,18 @@ void	print_status(t_info *info, char *status, int n)
 	long long	current_time;
 	long long	philo_time;
 
+	pthread_mutex_lock(&(info->print));
 	current_time = get_time();
-	if (info->dead == 1 && ft_strcmp(status, "died") != 0)
+	if (info->dead == 1)
+	{
+		pthread_mutex_unlock(&(info->print));
 		return ;
+	}
 	philo_time = info->pro_start;
 	time = current_time - philo_time;
-	pthread_mutex_lock(&(info->print));
-	if (info->dead != 1)
-		printf("%ld %d %s\n", time, n, status);
-	pthread_mutex_unlock(&(info->print));
+	printf("%ld %d %s\n", time, n, status);
+	if (ft_strcmp(status, "died") != 0)
+		pthread_mutex_unlock(&(info->print));
 }
 
 int	check_time(t_philo *philo)
@@ -61,9 +64,10 @@ int	check_time(t_philo *philo)
 	if (time > info->time_to_die)
 	{
 		philo->die = 1;
+		info->number_of_philo -= 1;
 		print_status(philo->info, "died", philo->n);
 		philo->info->dead = 1;
-		info->number_of_philo -= 1;
+		pthread_mutex_unlock(&info->print);
 		return (0);
 	}
 	return (1);

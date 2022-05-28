@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 23:06:52 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/05/22 12:48:26 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/05/28 11:16:21 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,7 @@ void	create_simulation(t_philo *philo, t_fork *fork, t_info *info)
 
 	ph = 1;
 	fk = 0;
-	while (fk < info->number_of_philo)
-	{
-		add_fork(&fork);
-		fk++;
-	}
-	fork_counting(fork);
+	fork_init(&fork, info->number_of_philo);
 	info->fork = fork;
 	while (ph <= info->number_of_philo)
 	{
@@ -115,11 +110,5 @@ int	main(int ac, char **av)
 	waitpid(-1, &status, 0);
 	ft_exit(philo, info, status, info->number_of_philo);
 	n = 1;
-	while (fork)
-	{
-		sem_close(fork->id);
-		sem_unlink(ft_itoa(n));
-		n++;
-		fork = fork->next;
-	}
+	sem_unlink("forks");
 }

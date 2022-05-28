@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 23:07:28 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/05/22 11:16:12 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/05/28 11:12:34 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct d_fork
 	sem_t			*id;
 	int				used;
 	int				n;
-	struct d_fork	*next;
 }				t_fork;
 
 typedef struct d_info
@@ -76,7 +75,7 @@ void		philo_init(t_philo **philo, t_info *info, int n);
 void		add_philo(t_philo **philo, t_info *info, int n);
 int			philo_counting(t_philo *philo);
 
-void		fork_init(t_fork **fork);
+void		fork_init(t_fork **fork, int n);
 void		add_fork(t_fork **head_fork);
 int			fork_counting(t_fork *fork);
 t_fork		*get_fork(t_fork *fork, int n);
