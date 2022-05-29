@@ -6,7 +6,7 @@
 /*   By: yait-iaz <yait-iaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 23:06:52 by yait-iaz          #+#    #+#             */
-/*   Updated: 2022/05/28 11:16:21 by yait-iaz         ###   ########.fr       */
+/*   Updated: 2022/05/28 12:16:09 by yait-iaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	info = info_init(av, ac);
+	if (!info)
+		return (0);
 	create_simulation(philo, fork, info);
 	waitpid(-1, &status, 0);
 	ft_exit(philo, info, status, info->number_of_philo);
